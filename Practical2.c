@@ -46,32 +46,37 @@ int main()
     //     printf("%d ", arr[i]);
     // }
     // free(arr);
-
+    
+    srand(time(NULL));
     int **matrix;
     int Rows = rand()% 100;
     int Column = rand()% 100;
     int size = Rows * Column;
-    matrix = (int**) malloc(Column * sizeof(int*));
-    for (int C = 0; C < Column; C++)
-    {
-        matrix[C] = (int*) malloc(Rows * sizeof(int));
-    }
+    int sum = 0;
+    matrix = (int**) malloc(Rows * sizeof(int*));
+    for (int R = 0; R < Rows; R++) {
+        matrix[R] = (int*) malloc(Column * sizeof(int));
+    }   
 
-    for (int C = 0; C < Column; C++)
+    for (int R = 0; R < Rows; R++) {
+        for (int C = 0; C < Column; C++) {
+            matrix[R][C] = rand() % 100;
+        }
+    }
+    
+    for (int R = 0; R < Rows; R++)
     {
-        for (int R = 0; R < Rows; R++)
+        for (int C = 0; C < Column; C++)
         {
-            matrix[C][R] = rand()%100;
+            sum += matrix[R][C];
+            printf("%3d ", matrix[R][C]);
         };
+        printf("\n");
         
     }
-    for (int C = 0; C < Column; C++)
-    {
-        for (int R = 0; R < Rows; R++)
-        {
-            printf("%d ", matrix[C][R]);
-        };
-        
+    printf("Summa: %d\n", sum);
+    for (int C = 0; C < Column; C++) {
+        free(matrix[C]);
     }
     free(matrix);
     
