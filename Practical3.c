@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
+#define BUFFER_SIZE 4096
 typedef struct
 {
     char name[30];
@@ -8,7 +9,7 @@ typedef struct
     float grade;
 }Student;
 
-int main()
+int main(int argc, char *argv[])
 {
     // FILE *fptr;
     // fptr = fopen("test.txt", "r");
@@ -37,22 +38,31 @@ int main()
         {"Petro", 21, 76.3}
     };
     
-    FILE *file;
-    FILE *file1;
-    Student buffer[3];
-    file = fopen("Student.bin", "wb");
-    file1 = fopen("Student.txt", "w");
-    fwrite(students, sizeof(Student), 3, file);
-    fwrite(students, sizeof(Student), 3, file1);
-    fclose(file);
-    fclose(file1);
-    file = fopen("Student.bin", "rb");
-    fread(buffer, sizeof(Student), 3, file);
-    fclose(file);
-    for(int i=0; i<3; i++){
-        printf("name: %s\n age: %d\n grade: %.2f\n", buffer[i].name, buffer[i].age, buffer[i].grade);
-    }
+    // FILE *file;
+    // FILE *file1;
+    // Student buffer[3];
+    // file = fopen("Student.bin", "wb");
+    // file1 = fopen("Student.txt", "w");
+    // fwrite(students, sizeof(Student), 3, file);
+    // fwrite(students, sizeof(Student), 3, file1);
+    // fclose(file);
+    // fclose(file1);
+    // file = fopen("Student.bin", "rb");
+    // fread(buffer, sizeof(Student), 3, file);
+    // fclose(file);
+    // for(int i=0; i<3; i++){
+    //     printf("name: %s\n age: %d\n grade: %.2f\n", buffer[i].name, buffer[i].age, buffer[i].grade);
+    // }
 
-
+    FILE *FileToCopy = fopen(argv[1], "rb");
+    FILE *FileToPaste = fopen(argv[2], "wb");
+    char buffer[BUFFER_SIZE];
+    size_t bytesread;
+    while((bytesread = fread(buffer, 1, BUFFER_SIZE, FileToCopy)) > 0){
+        fwrite(buffer, 1, BUFFER_SIZE, FileToPaste);
+    };
+    fclose(FileToCopy);
+    fclose(FileToPaste);
+    printf("Успіх");
     return 0;
 }
