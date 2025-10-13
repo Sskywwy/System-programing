@@ -5,11 +5,9 @@
 int main() {
     // DWORD pid = GetCurrentProcessId();
     // DWORD ppid = 0;
-
     // HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
     // PROCESSENTRY32 entry;
     // entry.dwSize = sizeof(PROCESSENTRY32);
-
     // if (Process32First(snapshot, &entry)) {
     //     do {
     //         if (entry.th32ProcessID == pid) {
@@ -18,9 +16,7 @@ int main() {
     //         }
     //     } while (Process32Next(snapshot, &entry));
     // }
-
     // CloseHandle(snapshot);
-
     // printf("PID: %lu\n", pid);
     // printf("PPID: %lu\n", ppid);
 
@@ -28,12 +24,9 @@ int main() {
 
     // STARTUPINFO si;
     // PROCESS_INFORMATION pi;
-
     // ZeroMemory(&si, sizeof(si));
     // si.cb = sizeof(si);
     // ZeroMemory(&pi, sizeof(pi));
-
-    
     // if (CreateProcess(
     //     NULL,               
     //     "notepad.exe",      
@@ -60,12 +53,9 @@ int main() {
 
     // STARTUPINFO si;
     // PROCESS_INFORMATION pi;
-
     // ZeroMemory(&si, sizeof(si));
     // si.cb = sizeof(si);
     // ZeroMemory(&pi, sizeof(pi));
-
-    
     // if (CreateProcess(
     //     NULL,               
     //     "child.exe",        
@@ -73,19 +63,13 @@ int main() {
     //     0, NULL, NULL,
     //     &si, &pi)) {
 
-    //     printf("Батьківський процес (PID: %lu) чекає дочірнього...\n", GetCurrentProcessId());
-
-        
+    //     printf("Батьківський процес (PID: %lu) чекає дочірнього...\n", GetCurrentProcessId());  
     //     WaitForSingleObject(pi.hProcess, INFINITE);
-
-        
     //     DWORD exitCode;
     //     GetExitCodeProcess(pi.hProcess, &exitCode);
     //     printf("Дочірній процес завершився з кодом: %lu\n", exitCode);
-
     //     CloseHandle(pi.hProcess);
     //     CloseHandle(pi.hThread);
-
     // } else {
     //     printf("Помилка створення дочірнього процесу: %lu\n", GetLastError());
     // }
