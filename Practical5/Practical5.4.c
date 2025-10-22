@@ -85,7 +85,7 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    SetHandleInformation(hWritePipe, HANDLE_FLAG_INHERIT, 0); // Тимчасово знімаємо флаг успадкування
+    SetHandleInformation(hWritePipe, HANDLE_FLAG_INHERIT, 0);
 
     PROCESS_INFORMATION piReader;
     STARTUPINFO siReader;
