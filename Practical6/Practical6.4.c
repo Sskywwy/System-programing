@@ -43,15 +43,12 @@ int main() {
     // --- 1. Initialization (Ініціалізація) ---
     printf("Initializing array with %d elements...\n", ARRAY_SIZE);
     for (int i = 0; i < ARRAY_SIZE; i++) {
-        array[i] = 1; // Заповнюємо одиницями. Сума має бути == ARRAY_SIZE
+        array[i] = 1;
     }
 
-    // Створюємо "менеджери" для наших потоків
     pthread_t threads[NUM_THREADS];
     ThreadArgs thread_args[NUM_THREADS];
 
-    // --- 2. Partitioning (Розподіл роботи) ---
-    // Це "core logic" (ключова логіка) розподілу.
     int chunk_size = ARRAY_SIZE / NUM_THREADS;
     int remainder = ARRAY_SIZE % NUM_THREADS;
 
@@ -78,11 +75,7 @@ int main() {
                current_chunk_size);
 
         // --- 3. Thread Creation (Створення потоків) ---
-        int rc = pthread_create(&threads[i], NULL, thread_routine, &thread_args[i]);
-        if (rc) {
-            printf("ERROR; return code from pthread_create() is %d\n", rc);
-            exit(-1);
-        }
+        pthread_create(&threads[i], NULL, thread_routine, &thread_args[i]);
     }
 
     // --- 4. Synchronization (Синхронізація) ---
