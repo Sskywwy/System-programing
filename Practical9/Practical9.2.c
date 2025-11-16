@@ -16,6 +16,5 @@ int main()
     printf("Original file descriptor: t_fd1 = %d\n", fd1);
     int fd2 = dup(fd1);
     printf("Duplicated file descriptor: fd2 = %d\n", fd2);
-     
     return 0;
 }

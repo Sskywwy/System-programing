@@ -1,0 +1,2 @@
+Redirected output
+This also goes to the file.
