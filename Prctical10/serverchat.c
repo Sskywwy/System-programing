@@ -21,15 +21,34 @@ int main()
     listen(server_fd, 3);
     
     char buffer[1024] = {0};
+    char response[1024] = {0};
     int new_fd = accept(server_fd, (struct sockaddr*)&address, (socklen_t*)&len);
-    printf("Client conected\n");
-    ssize_t valread = recv(new_fd, buffer, 1024, 0);
-    if (valread > 0) {
-        printf("Message from Client: %s\n", buffer);
+
+    while (1)
+    {
+        memset(buffer, 0, 1024);
+
+        int valread = recv(new_fd, buffer, 1024, 0);
+        if (valread <= 0) {
+            printf("Client disconnected.\n");
+            break;}
+        
+        printf("\nClient: %s", buffer);
+        if (strncmp(buffer, "exit", 4) == 0) {
+            printf("Server exiting...\n");
+            break;
+        }
+
+        printf("Server (You): ");
+        fgets(response, 1024, stdin);
+        send(new_fd, response, strlen(response), 0);
+        
+        if (strncmp(response, "exit", 4) == 0) {
+            printf("Server exiting...\n");
+            break;
+        
     }
-    char *response = "hello client";
-    send(new_fd, response, strlen(response), 0);
-    printf("Response sent to client.\n");
+}
 
     close(server_fd);
     close(new_fd);
