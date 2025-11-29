@@ -1,0 +1,16 @@
+
+CC = gcc
+CFLAGS = -Wall
+app1.o: app1.c
+	$(CC) $(CFLAGS) -c app1.c
+
+utils.o: utils.c
+	$(CC) $(CFLAGS) -c utils.c
+
+app: app1.o utils.o
+	$(CC) app1.o utils.o -o app
+
+
+
+clean:
+	rm -f *.o app

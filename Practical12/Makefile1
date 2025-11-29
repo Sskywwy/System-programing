@@ -1,0 +1,2 @@
+app1: app1.c
+	gcc app1.c -o app1 -L. -lutils
