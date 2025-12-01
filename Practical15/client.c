@@ -32,8 +32,13 @@ int main()
 
     //Connect and handshake
     CHECK((connect(sock, (struct sockaddr *)&serv_addr, len)), "ERROR")
-    send(sock, name, 32, 0);
-    printf("=== WELCOME TO THE CHATROOM, %s ===\n", name);
+    if ((send(sock, name, 32, 0)) < 1){
+        printf("Dont enter the name");
+        return EXIT_FAILURE;
+    }
+    else {
+        printf("=== WELCOME TO THE CHATROOM, %s ===\n", name);
+    }
 
     //Create thread for sending message
     pthread_t send_msg;

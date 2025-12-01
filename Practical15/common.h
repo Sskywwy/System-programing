@@ -9,7 +9,7 @@
 
 #define PORT 8080
 #define BUFFER_SIZE 2048
-#define MAX_CLIENTS 10
+#define MAX_CLIENTS 3
 //ERROR HANDLE
 //if value < 0, print error
 #define CHECK(x, msg) \
