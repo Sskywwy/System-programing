@@ -3,6 +3,7 @@
 //Configuration
 client_t *clients[MAX_CLIENTS];
 pthread_mutex_t clients_mutex = PTHREAD_MUTEX_INITIALIZER;
+int cli_count = 0;
 
 //Prototype
 void queue_add(client_t *cl);
@@ -31,12 +32,20 @@ int main() {
 
   //Accept new user loop
   int id = 0;
-  while (id<=MAX_CLIENTS) {
+  while (1) {
     //Create struct for every accept
     struct sockaddr_in client_addr;
     socklen_t client_len = sizeof(client_addr);
     int sock_accept =
         accept(sock, (struct sockaddr *)&client_addr, &client_len);
+    
+    // Check for max clients
+        if ((cli_count + 1) == MAX_CLIENTS) {
+            printf("Max clients reached. Connection rejected: ");
+            printf("%s:%d\n", inet_ntoa(client_addr.sin_addr), ntohs(client_addr.sin_port));
+            close(sock_accept);
+            continue;
+          }
     printf("New connection accepted\n");
     id++;
     createThreadClient(id, sock_accept);
