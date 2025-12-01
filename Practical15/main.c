@@ -31,15 +31,17 @@ int main() {
 
   //Accept new user loop
   int id = 0;
-  while (1) {
+  while (id<=MAX_CLIENTS) {
     //Create struct for every accept
     struct sockaddr_in client_addr;
     socklen_t client_len = sizeof(client_addr);
     int sock_accept =
         accept(sock, (struct sockaddr *)&client_addr, &client_len);
     printf("New connection accepted\n");
-    createThreadClient(id++, sock_accept);
+    id++;
+    createThreadClient(id, sock_accept);
   }
+  printf("TOO MUCH CONNECTION");
   //never distination
   close(sock);
   return 0;

@@ -1,4 +1,6 @@
 #include "common.h"
+
+//Configuration
 int sock = 0;
 char name[32];
 volatile __sig_atomic_t flag = 0;
