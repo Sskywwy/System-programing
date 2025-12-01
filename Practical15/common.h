@@ -10,6 +10,13 @@
 #define PORT 8080
 #define BUFFER_SIZE 2048
 #define MAX_CLIENTS 10
+//ERROR HANDLE
+//if value < 0, print error
+#define CHECK(x, msg) \
+    if ((x)<0) { \
+        perror(msg); \
+        exit(EXIT_FAILURE); \
+    }
 
 typedef struct {
     int sockfd;
